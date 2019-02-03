@@ -21,7 +21,22 @@ To run the image:
 
 You will need to add volume statements to the `run` command for this to be useful - you will probably want to map your working directory to `/project` or similar, so that the command can read/write to your host's filing system.
 
+The command saves authentication data in `~/.config/stitch/stitch`, so it would make sense to set up a folder volume for that too.
+
+So, a workflow could look like this:
+
+    docker run --volume=/home/youruser/.config/stitch:/root/.config/stitch -it stitch-cli stitch-cli login --username=youremail@example.com --api-key=01234567-abcd-efgh-ijkl-mnopqrstuvwx
+
+    docker run --volume=/home/youruser/.config/stitch:/root/.config/stitch -it stitch-cli whoami
+
+    ... import and export here ...
+
 Status
 ---
 
 This has not been through much testing, but I will update these docs as I make use of it. I am also not a Go programmer, so there are undoubtedly better ways to build.
+
+Future expansion
+---
+
+Some use of Docker Compose would be nice here, to remove the need to add volume specs on everything.
