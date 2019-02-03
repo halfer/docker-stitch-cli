@@ -30,6 +30,9 @@ FROM alpine:3.9
 # Do a system update
 RUN apk update
 
+# Add required stuff
+RUN apk add ca-certificates
+
 COPY --from=build /root/src/stitch-cli/stitch-cli /usr/bin/
 
 CMD ["/bin/sh"]
