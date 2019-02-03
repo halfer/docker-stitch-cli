@@ -1,6 +1,6 @@
 # Docker image for the Mongo Stitch command
 
-FROM golang:alpine
+FROM golang:alpine AS build
 
 # Do a system update
 RUN apk update
@@ -23,5 +23,13 @@ RUN GOPATH=$GOPATH:/root dep ensure
 
 # Now it should build
 RUN GOPATH=$GOPATH:/root go build
+
+# Second stage build to just expose the command
+FROM alpine:3.9
+
+# Do a system update
+RUN apk update
+
+COPY --from=build /root/src/stitch-cli/stitch-cli /usr/bin/
 
 CMD ["/bin/sh"]
