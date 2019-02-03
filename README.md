@@ -26,13 +26,16 @@ The command saves authentication data in `~/.config/stitch/stitch`, so you will 
 So, a workflow could look like this:
 
     # Log in
-    docker run --volume=/home/youruser/.config/stitch:/root/.config/stitch -it stitch-cli stitch-cli login --username=youremail@example.com --api-key=01234567-abcd-efgh-ijkl-mnopqrstuvwx
+    docker run -it --volume=/home/youruser/.config/stitch:/root/.config/stitch -it stitch-cli stitch-cli login --username=youremail@example.com --api-key=01234567-abcd-efgh-ijkl-mnopqrstuvwx
 
     # Check you're logged in
-    docker run --volume=/home/youruser/.config/stitch:/root/.config/stitch -it stitch-cli whoami
+    docker run -it --volume=/home/youruser/.config/stitch:/root/.config/stitch -it stitch-cli whoami
 
-    # Assumes you're in a local Stitch project folder
-    docker run --volume=/home/youruser/.config/stitch:/root/.config/stitch --volume=`pwd`:/root -it stitch-cli stitch-cli import --strategy=merge
+    # Import to Stitch, assumes you're in a local Stitch project folder
+    docker run -it --volume=/home/youruser/.config/stitch:/root/.config/stitch --volume=`pwd`:/project -it stitch-cli stitch-cli import --strategy=merge
+
+    # Export from Stitch, this will copy it to /tmp/project/out on the host
+    docker run -it --volume=/home/youruser/.config/stitch:/root/.config/stitch --volume=/tmp/project:/project stitch-cli stitch-cli export --app-id=stackwatcher-prod-keysc --output=/project/out
 
 Status
 ---
@@ -43,3 +46,5 @@ Future expansion
 ---
 
 Some use of Docker Compose would be nice here, to remove the need to add volume specs on everything.
+
+Also the export should really overwrite the on-host project automatically. That's possible with some shell scripting; on its own, the export command requires the output folder to not exist.
