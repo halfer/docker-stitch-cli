@@ -19,9 +19,9 @@ To run the image:
 
     docker run -it stitch-cli stitch-cli --help
 
-You will need to add volume statements to the `run` command for this to be useful - you will probably want to map your working directory to `/project` or similar, so that the command can read/write to your host's filing system.
+You will need to add a volume statement to the `run` command for the import/export commands, so that your project can be read or written.
 
-The command saves authentication data in `~/.config/stitch/stitch`, so it would make sense to set up a folder volume for that too.
+The command saves authentication data in `~/.config/stitch/stitch`, so you will need to set up a folder volume for that too.
 
 So, a workflow could look like this:
 
