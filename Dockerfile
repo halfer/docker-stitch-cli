@@ -27,8 +27,8 @@ RUN GOPATH=$GOPATH:/root go build
 # Second stage build to just expose the command
 FROM alpine:3.9
 
-#Set new default folder
-WORKDIR /root
+# Set new default folder
+WORKDIR /project
 
 # Do a system update
 RUN apk update
