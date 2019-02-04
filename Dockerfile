@@ -7,7 +7,7 @@ FROM golang:alpine AS build
 RUN apk update && apk add git curl
 
 # Declare base dir
-WORKDIR /go/src/github.com/10gen/stitch-cli
+WORKDIR $GOPATH/src/github.com/10gen/stitch-cli
 
 RUN git clone https://github.com/10gen/stitch-cli.git .
 
