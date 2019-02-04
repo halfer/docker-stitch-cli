@@ -3,9 +3,8 @@
 FROM golang:alpine AS build
 
 # Do a system update
-RUN apk update
-
-RUN apk add git curl
+# No need to put this into separate steps.
+RUN apk update && apk add git curl
 
 # Declare base dir
 WORKDIR /root/src
