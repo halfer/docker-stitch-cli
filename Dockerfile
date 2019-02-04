@@ -33,4 +33,4 @@ RUN apk update && apk add --no-cache ca-certificates
 
 COPY --from=build /go/src/github.com/10gen/stitch-cli/stitch-cli /usr/bin/
 
-CMD ["/bin/sh"]
+ENTRYPOINT ["/usr/bin/stitch-cli"]
