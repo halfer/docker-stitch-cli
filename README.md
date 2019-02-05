@@ -17,7 +17,7 @@ To build the image:
 
 To run the image:
 
-    docker run -it stitch-cli stitch-cli --help
+    docker run -it --rm stitch-cli --help
 
 You will need to add a volume statement to the `run` command for the import/export commands, so that your project can be read or written.
 
@@ -26,16 +26,16 @@ The command saves authentication data in `~/.config/stitch/stitch`, so you will 
 So, a workflow could look like this:
 
     # Log in
-    docker run -it --volume=/home/youruser/.config/stitch:/root/.config/stitch -it stitch-cli stitch-cli login --username=youremail@example.com --api-key=01234567-abcd-efgh-ijkl-mnopqrstuvwx
+    docker run --rm -it --volume=/home/youruser/.config/stitch:/root/.config/stitch stitch-cli login --username=youremail@example.com --api-key=01234567-abcd-efgh-ijkl-mnopqrstuvwx
 
     # Check you're logged in
-    docker run -it --volume=/home/youruser/.config/stitch:/root/.config/stitch -it stitch-cli whoami
+    docker run --rm -it --volume=/home/youruser/.config/stitch:/root/.config/stitch stitch-cli whoami
 
     # Import to Stitch, assumes you're in a local Stitch project folder
-    docker run -it --volume=/home/youruser/.config/stitch:/root/.config/stitch --volume=`pwd`:/project -it stitch-cli stitch-cli import --strategy=merge
+    docker run --rm -it --volume=/home/youruser/.config/stitch:/root/.config/stitch --volume=`pwd`:/project stitch-cli import --strategy=merge
 
     # Export from Stitch, this will copy it to /tmp/project/out on the host
-    docker run -it --volume=/home/youruser/.config/stitch:/root/.config/stitch --volume=/tmp/project:/project stitch-cli stitch-cli export --app-id=stackwatcher-prod-keysc --output=/project/out
+    docker run --rm -it --volume=/home/youruser/.config/stitch:/root/.config/stitch --volume=/tmp/project:/project stitch-cli stitch-cli export --app-id=stackwatcher-prod-keysc --output=/project/out
 
 Status
 ---
