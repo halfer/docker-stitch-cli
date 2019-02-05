@@ -13,7 +13,7 @@ Usage
 
 To build the image:
 
-    docker build -tag stitch-cli .
+    docker build -t stitch-cli .
 
 To run the image:
 
