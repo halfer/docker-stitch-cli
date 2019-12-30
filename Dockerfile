@@ -12,7 +12,15 @@ WORKDIR $GOPATH/src/github.com/10gen/stitch-cli
 # Fetch the dependencies
 RUN curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
 
+# Master sometimes breaks, so use a release
+#
+# 1.5 - OK
+# 1.6 - OK
+# 1.7 - OK
+# 1.8 - fails
+# 1.9 - fails
 RUN git clone https://github.com/10gen/stitch-cli.git .
+RUN git checkout v1.7.0
 
 # Remove the old dependencies
 RUN rm -rf vendor
