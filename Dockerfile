@@ -9,13 +9,13 @@ RUN apk update && apk add git curl
 # Declare base dir
 WORKDIR $GOPATH/src/github.com/10gen/stitch-cli
 
+# Fetch the dependencies
+RUN curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+
 RUN git clone https://github.com/10gen/stitch-cli.git .
 
 # Remove the old dependencies
 RUN rm -rf vendor
-
-# Fetch the dependencies
-RUN curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
 
 # We build in case all depencies are pulled in corrctly.
 RUN dep ensure && go build
