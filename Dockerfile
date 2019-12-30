@@ -17,10 +17,12 @@ RUN curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
 # 1.5 - OK
 # 1.6 - OK
 # 1.7 - OK
-# 1.8 - fails
-# 1.9 - fails
+# 1.8 - ?
+# 1.9 - OK
 RUN git clone https://github.com/10gen/stitch-cli.git .
-RUN git checkout v1.7.0
+RUN git checkout v1.9.0
+# `dep init` required 1.8+
+RUN dep init
 
 # Remove the old dependencies
 RUN rm -rf vendor
