@@ -35,7 +35,7 @@ So, a workflow could look like this (uses Bash backticks - amend this on other o
     docker run --rm -it --volume=`echo $HOME`/.config/stitch:/root/.config/stitch --volume=`pwd`:/project stitch-cli import --strategy=merge
 
     # Export from Stitch, this will copy it to /tmp/project/out on the host
-    docker run --rm -it --volume=`echo $HOME`/.config/stitch:/root/.config/stitch --volume=/tmp/project:/project stitch-cli stitch-cli export --app-id=stackwatcher-prod-keysc --output=/project/out
+    docker run --rm -it --volume=`echo $HOME`/.config/stitch:/root/.config/stitch --volume=/tmp/project:/project stitch-cli export --app-id=stackwatcher-prod-keysc --output=/project/out
 
 Status
 ---
